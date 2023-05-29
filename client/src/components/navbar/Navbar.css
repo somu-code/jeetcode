@@ -1,0 +1,37 @@
+.nav {
+  max-width: 1440px;
+  margin-inline: auto;
+  background-color: #242424;
+  color: #fff;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.nav-menu {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.nav-menu li {
+  padding: 0 1rem;
+}
+
+.logo {
+  font-weight: 300;
+  font-size: 24px;
+}
+
+.logo-svg {
+  width: 2rem;
+}
+
+.logo-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+}
