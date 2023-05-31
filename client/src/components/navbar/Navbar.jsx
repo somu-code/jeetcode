@@ -13,11 +13,21 @@ function Navbar() {
         </Link>
         <div className="nav-right">
           <ul className="nav-menu">
-            <li>Premium</li>
-            <li>Explore</li>
-            <li>Product</li>
-            <li>Developer</li>
-            <li>Sign in</li>
+            <li>
+              <Link to="premium">Premium</Link>
+            </li>
+            <li>
+              <Link to="explore">Explore</Link>
+            </li>
+            <li>
+              <Link to="product">Product</Link>
+            </li>
+            <li>
+              <Link to="developer">Developer</Link>
+            </li>
+            <li>
+              <Link to="/login">Sign in</Link>
+            </li>
           </ul>
         </div>
       </div>
