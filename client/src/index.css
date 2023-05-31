@@ -2,7 +2,7 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  font-size: 1;
+  font-size: 1rem;
 
   color-scheme: light dark;
 
@@ -22,24 +22,16 @@
 * {
   margin: 0;
   padding: 0;
-  font: inherit;
 }
 
 html {
-  color-scheme: drak light;
+  color-scheme: dark light;
 }
 
 body {
+  max-width: 1440px;
   min-height: 100vh;
-}
-
-img {
-  max-width: 100%;
-  display: block;
-}
-
-ul li {
-  list-style: none;
+  margin-inline: auto;
 }
 
 a:-webkit-any-link {
@@ -48,4 +40,23 @@ a:-webkit-any-link {
 
 a {
   color: var(--color-neon);
+}
+
+img,
+picture,
+video,
+canvas {
+  max-width: 100%;
+  display: block;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+ul li {
+  list-style: none;
 }

@@ -17,7 +17,7 @@ function Navbar() {
             <li>Explore</li>
             <li>Product</li>
             <li>Developer</li>
-            <li>Sing in</li>
+            <li>Sign in</li>
           </ul>
         </div>
       </div>
