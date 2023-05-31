@@ -16,10 +16,6 @@
   align-items: center;
 }
 
-.nav-menu li {
-  padding: 0 1rem;
-}
-
 .logo {
   font-weight: 300;
   font-size: 24px;
@@ -34,4 +30,20 @@
     flex-direction: row;
     align-items: center;
     gap: 1rem;
+}
+
+.button-hover {
+  padding: 0 .67rem;
+  height: 2.2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1rem;
+}
+
+.button-hover:hover {
+  background-color: whitesmoke;
+  color:#000;
+  transition: all 0.8s ease;
 }

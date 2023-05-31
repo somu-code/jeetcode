@@ -13,21 +13,21 @@ function Navbar() {
         </Link>
         <div className="nav-right">
           <ul className="nav-menu">
-            <li>
-              <Link to="premium">Premium</Link>
-            </li>
-            <li>
-              <Link to="explore">Explore</Link>
-            </li>
-            <li>
-              <Link to="product">Product</Link>
-            </li>
-            <li>
-              <Link to="developer">Developer</Link>
-            </li>
-            <li>
-              <Link to="/login">Sign in</Link>
-            </li>
+            <Link to="/premium">
+              <li className="button-hover">Premium</li>
+            </Link>
+            <Link to="/explore">
+              <li className="button-hover">Explore</li>
+            </Link>
+            <Link to="/product">
+              <li className="button-hover">Product</li>
+            </Link>
+            <Link to="/developer">
+              <li className="button-hover">Developer</li>
+            </Link>
+            <Link to="/singin">
+              <li className="button-hover">Sing in</li>
+            </Link>
           </ul>
         </div>
       </div>
