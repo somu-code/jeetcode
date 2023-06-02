@@ -1,4 +1,4 @@
-import "./signin.css";
+import "./Signin.css";
 import { AiFillGoogleCircle } from "react-icons/ai";
 import { AiFillGithub } from "react-icons/ai";
 import { Link } from "react-router-dom";
@@ -24,7 +24,9 @@ function SignIn() {
           />
           <button className="button">Sign In</button>
           <div className="forgot-password-signup">
-            <span className="forgot-password">Forgot Password?</span>
+            <Link to="/forgot-password">
+              <span className="forgot-password">Forgot Password?</span>
+            </Link>
             <Link to="/signup">
               <span className="signup">Sign Up</span>
             </Link>
