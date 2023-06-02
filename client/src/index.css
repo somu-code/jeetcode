@@ -29,7 +29,6 @@ html {
 }
 
 body {
-  max-width: 1440px;
   min-height: 100vh;
   margin-inline: auto;
 }
@@ -54,6 +53,7 @@ input,
 button,
 textarea,
 select {
+  display: block;
   font: inherit;
 }
 

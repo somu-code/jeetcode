@@ -1,7 +1,10 @@
+.main-nav {
+  background-color: #242424;
+}
+
 .nav {
   max-width: 1440px;
   margin-inline: auto;
-  background-color: #242424;
   color: #fff;
   display: flex;
   flex-direction: row;
@@ -17,7 +20,7 @@
 }
 
 .logo {
-  font-weight: 300;
+  font-weight: 400;
   font-size: 24px;
 }
 
@@ -26,14 +29,14 @@
 }
 
 .logo-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
 }
 
 .button-hover {
-  padding: 0 .67rem;
+  padding: 0 0.67rem;
   height: 2.2rem;
   display: flex;
   flex-direction: row;
@@ -44,6 +47,6 @@
 
 .button-hover:hover {
   background-color: whitesmoke;
-  color:#000;
+  color: #000;
   transition: all 0.8s ease;
 }
