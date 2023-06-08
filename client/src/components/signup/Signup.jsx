@@ -25,14 +25,30 @@ function SignUp() {
     });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    if (formData.password !== formData.confirmPassword) {
+    if (formData.password != formData.confirmPassword) {
       setShowTag(true);
     } else {
       setShowTag(false);
+
+      try {
+        const response = await fetch("http://localhost:3000/signup", {
+          method: "POST",
+          headers: {
+            "content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        });
+        if (response.ok) {
+          console.log(formData);
+        } else {
+          console.log("Sign up failed");
+        }
+      } catch (error) {
+        console.error("Error", error);
+      }
     }
-    console.log(formData);
   };
 
   return (

@@ -19,9 +19,6 @@ function SignIn() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("This code runs");
-    console.log(formData);
-    console.log("This code also runs");
 
     try {
       const response = await fetch("http://localhost:3000/signin", {
@@ -31,11 +28,11 @@ function SignIn() {
         },
         body: JSON.stringify(formData),
       });
-      console.log("I am here");
       if (response.ok) {
         // Authentication successful
         // Redirect or preform any necessary actions
         console.log("User authentication!");
+        console.log(formData);
       } else {
         // Authentication failed
         // Handle error appropriately

@@ -14,6 +14,11 @@ app.use(corsMiddleware);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+app.post("/signup", (req, res) => {
+    const { username, email, password } = req.body;
+    res.send("Sing up successful");
+})
+
 app.post("/signin", (req, res) => {
     const { email, password } = req.body;
     if (email === "example@example.com" && password === "password") {
