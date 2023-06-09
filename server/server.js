@@ -1,6 +1,33 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const bcrypt = require("bcrypt");
 const port = 3000;
+
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const uri = "mongodb+srv://codesomu:bn6gymxGveiykBcy@jeetcode.cxwhemq.mongodb.net/?retryWrites=true&w=majority";
+
+// Create a MongoClient with a MongoClientOptions object to set the Stable API version
+const client = new MongoClient(uri, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  }
+});
+
+async function run() {
+  try {
+    // Connect the client to the server	(optional starting in v4.7)
+    await client.connect();
+    // Send a ping to confirm a successful connection
+    await client.db("admin").command({ ping: 1 });
+    console.log("Pinged your deployment. You successfully connected to MongoDB!");
+  } finally {
+    // Ensures that the client will close when you finish/error
+    await client.close();
+  }
+}
+run().catch(console.dir);
 
 const corsMiddleware = (req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
@@ -14,18 +41,34 @@ app.use(corsMiddleware);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.post("/signup", (req, res) => {
+app.post("/signup", async (req, res) => {
     const { username, email, password } = req.body;
-    res.send("Sing up successful");
+    try {
+        // Hash the password
+        const hashedPassword = await bcrypt.hash(password, 8);
+
+        await client.connect();
+        const collection = client.db("jeetcode").collection("users");
+
+        // Create a new user
+        const newUser = {
+            username,
+            email,
+            password: hashedPassword
+        }
+
+        // Insert the new user document into the collection
+        await collection.insertOne(newUser);
+
+        res.send("Signup successful");
+    } catch(error) {
+        console.error("Error:", error);
+        res.status(400).send("Error occurred");
+    }
 })
 
 app.post("/signin", (req, res) => {
     const { email, password } = req.body;
-    if (email === "example@example.com" && password === "password") {
-        res.send("Login successful");
-    } else {
-        res.status(401).send("Invalid credentials");
-    }
 });
 
 app.listen(port, () => {
