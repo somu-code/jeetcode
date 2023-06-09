@@ -2,15 +2,15 @@ import { useState } from "react";
 import { AiFillGoogleCircle } from "react-icons/ai";
 import { AiFillGithub } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function SignUp() {
   const textStyle = {
     color: "red",
     textAlign: "center",
   };
-
+  const navigate = useNavigate();
   const [showTag, setShowTag] = useState(false);
-
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -41,6 +41,7 @@ function SignUp() {
           body: JSON.stringify(formData),
         });
         if (response.ok) {
+          navigate("./after-signup")
           console.log(formData);
         } else {
           console.log("Sign up failed");

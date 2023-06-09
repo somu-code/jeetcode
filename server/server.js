@@ -67,8 +67,34 @@ app.post("/signup", async (req, res) => {
     }
 })
 
-app.post("/signin", (req, res) => {
+app.post("/signin", async (req, res) => {
     const { email, password } = req.body;
+
+    try {
+      await client.connect();
+      const db = client.db("jeetcode");
+      const collection = db.collection("users");
+
+      const user = await collection.findOne({ email });
+      
+      if (!user) {
+        return res.status(404).json({ error: "User not found" });
+      }
+      // Validate password
+      const isMatch = await bcrypt.compare(password, user.password);
+
+      if(!isMatch) {
+        return res.status(401).send("Invalid credentials");
+      }
+
+      res.status(200).send({
+        userId: user._id,
+        token: "some token"
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Server error");
+    }
 });
 
 app.listen(port, () => {

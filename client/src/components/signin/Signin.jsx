@@ -69,9 +69,9 @@ function SignIn() {
               onChange={handleChange}
               required
             />
-            <button type="submit" className="button">
-              Sign In
-            </button>
+              <button type="submit" className="button">
+                Sign In
+              </button>
           </form>
           <div className="forgot-password-signup">
             <Link to="/forgot-password">
