@@ -4,7 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./components/home/Home";
 import SignIn from "./components/signin/Signin";
 import SignUp from "./components/signup/Signup";
-import ForgotPassword from "./components/forgot-password/ForgotPassword";
+import ForgotPassword from "./components/forgot_password/ForgotPassword";
 
 function App() {
   return (
