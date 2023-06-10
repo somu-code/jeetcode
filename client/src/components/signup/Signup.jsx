@@ -42,7 +42,6 @@ function SignUp() {
         });
         if (response.ok) {
           navigate("./after-signup")
-          console.log(formData);
         } else {
           console.log("Sign up failed");
         }

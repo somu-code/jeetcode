@@ -31,8 +31,6 @@ function SignIn() {
       if (response.ok) {
         // Authentication successful
         // Redirect or preform any necessary actions
-        console.log("User authentication!");
-        console.log(formData);
       } else {
         // Authentication failed
         // Handle error appropriately
