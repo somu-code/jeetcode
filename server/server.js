@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const bcrypt = require("bcrypt");
 const port = 3000;
 const jwt = require("jsonwebtoken");
+const cookieParser = require("cookie-parser");
 require("dotenv").config();
 
 const { MongoClient, ServerApiVersion } = require("mongodb");
@@ -48,6 +49,8 @@ const app = express();
 app.use(corsMiddleware);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(express.json());
+app.use(cookieParser());
 
 app.post("/signup", async (req, res) => {
   const { username, email, password } = req.body;
@@ -62,16 +65,17 @@ app.post("/signup", async (req, res) => {
     const newUser = {
       username,
       email,
+      role: "user",
       password: hashedPassword,
     };
 
     // Insert the new user document into the collection
     await collection.insertOne(newUser);
 
-    res.send("Signup successful");
+    res.json({ message: "Signup successful" });
   } catch (error) {
     console.error("Error:", error);
-    res.status(400).send("Error occurred");
+    res.status(400).json({ message: "Error occurred" });
   }
 });
 
@@ -92,19 +96,54 @@ app.post("/signin", async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
-      return res.status(401).send("Invalid credentials");
+      return res.status(401).json({ message: "Invalid credentials" });
     }
 
-    const token = jwt.sign({ userId: user._id }, process.env.TOKEN_SECRET, {
+    // Create payload data
+    const payload = {
+      userId: user._id,
+      role: "user",
+    };
+
+    const token = jwt.sign(payload, process.env.TOKEN_SECRET, {
       expiresIn: process.env.JWT_EXPRIATION_TIME,
     });
 
-    res.json({ token });
+    // Set cookie with token
+    res.cookie("access_token", token, {
+      httpOnly: true,
+      secure: true,
+      maxAge: 900,
+    });
+
+    res.json({ message: "Login sucessful" });
   } catch (error) {
-    console.error(error);
-    res.status(500).send("Server error");
+    console.error("Error:", error);
+    res.status(500).json({ message: "Server error" });
   }
 });
+
+// Define proctected route
+app.get("/protected", async (req, res) => {
+  try {
+    // Get cookie from request
+    const token = req.cookies.access_token;
+    //Verify JWT token
+    const decoded = jwt.verify(token, process.env.TOKEN_SECRET);
+    // Access payload data
+    const { username, role } = decoded;
+
+    //Prefom authorization logic
+    if (role === "user") {
+      res.json({ message: `${username}, you are authorized` });
+    } else {
+      res.status(403).json({ message: `You are not authorized` });
+    }
+  } catch (error) {
+    console.error("Error:", error.message);
+    res.status(401).json({ message: error.message });
+  }
+})
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
